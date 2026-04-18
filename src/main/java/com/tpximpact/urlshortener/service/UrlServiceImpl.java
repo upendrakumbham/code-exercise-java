@@ -1,4 +1,7 @@
 package com.tpximpact.urlshortener.service;
 
-public class UrlServiceImpl {
+import org.springframework.stereotype.Service;
+
+@Service
+public class UrlServiceImpl implements UrlService{
 }
