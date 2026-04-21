@@ -1,4 +1,8 @@
 package com.tpximpact.urlshortener.dto;
 
-public class UrlRequest {
-}
+import jakarta.validation.constraints.NotBlank;
+
+public record UrlRequest(
+        @NotBlank String fullUrl,
+        String customAlias
+) {}

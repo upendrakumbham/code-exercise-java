@@ -1,4 +1,5 @@
 package com.tpximpact.urlshortener.dto;
 
-public class UrlResponse {
-}
+public record UrlResponse(
+        String shortUrl
+) {}
