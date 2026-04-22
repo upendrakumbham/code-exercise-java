@@ -2,7 +2,6 @@ package com.tpximpact.urlshortener.util;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.net.URI;
 import java.util.UUID;
 
 @Slf4j
