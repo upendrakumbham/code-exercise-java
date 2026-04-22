@@ -18,7 +18,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class UrlServiceImpl implements UrlService {
-
+    private static final String BASE_URL = "http://localhost:8080/";
     private final UrlRepository urlRepository;
 
     @Override
@@ -39,7 +39,7 @@ public class UrlServiceImpl implements UrlService {
 
         urlRepository.save(url);
 
-        return new UrlResponse(UrlUtils.getBaseUrl(url.getFullUrl()) + alias);
+        return new UrlResponse(BASE_URL + alias);
     }
 
     @Override
@@ -56,7 +56,7 @@ public class UrlServiceImpl implements UrlService {
                 .map(url -> new UrlListResponse(
                         url.getAlias(),
                         url.getFullUrl(),
-                        UrlUtils.getBaseUrl(url.getFullUrl()) + url.getAlias()
+                        BASE_URL + url.getAlias()
                 ))
                 .toList();
     }
