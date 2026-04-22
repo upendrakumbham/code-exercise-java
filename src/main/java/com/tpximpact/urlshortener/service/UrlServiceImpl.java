@@ -28,7 +28,7 @@ public class UrlServiceImpl implements UrlService {
                 ? request.customAlias() : UrlUtils.generateAlias();
 
         if (urlRepository.existsByAlias(alias)) {
-            throw new BadRequestException("Url already exists");
+            throw new BadRequestException("Invalid input or alias already taken");
         }
 
         Url url = Url
