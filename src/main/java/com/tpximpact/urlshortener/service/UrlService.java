@@ -13,4 +13,6 @@ public interface UrlService {
     String getFullUrl(String alias);
 
     List<UrlListResponse> getAll();
+
+    void delete(String alias);
 }

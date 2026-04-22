@@ -8,6 +8,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,6 +42,12 @@ class UrlController {
     @GetMapping("/urls")
     public ResponseEntity<List<UrlListResponse>> getAll() {
         return ResponseEntity.ok(urlService.getAll());
+    }
+
+    @DeleteMapping("/{alias}")
+    public ResponseEntity<Void> delete(@PathVariable String alias) {
+        urlService.delete(alias);
+        return ResponseEntity.noContent().build();
     }
 
 }

@@ -60,4 +60,12 @@ public class UrlServiceImpl implements UrlService {
                 ))
                 .toList();
     }
+
+    public void delete(String alias) {
+
+        Url url = urlRepository.findByAlias(alias)
+                .orElseThrow(() -> new NotFoundException("Alias not found"));
+        log.info("Deleting shorten url for alias '{}' from the DB", url.getAlias());
+        urlRepository.delete(url);
+    }
 }
