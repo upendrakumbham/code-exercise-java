@@ -11,6 +11,6 @@ spring:
       path: /h2-console
 
   jpa:
+    show_sql: true
     hibernate:
       ddl-auto: update
-      show-sql: true
