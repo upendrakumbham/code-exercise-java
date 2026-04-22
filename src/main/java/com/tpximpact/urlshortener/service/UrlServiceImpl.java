@@ -6,6 +6,7 @@ import com.tpximpact.urlshortener.entity.Url;
 import com.tpximpact.urlshortener.exception.BadRequestException;
 import com.tpximpact.urlshortener.exception.NotFoundException;
 import com.tpximpact.urlshortener.repository.UrlRepository;
+import com.tpximpact.urlshortener.util.UrlUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.crossstore.ChangeSetPersister;
@@ -25,7 +26,7 @@ public class UrlServiceImpl implements UrlService {
     public UrlResponse shorten(UrlRequest request) {
 
         String alias = request.customAlias() != null
-                ? request.customAlias() : generateAlias();
+                ? request.customAlias() : UrlUtils.generateAlias();
 
         if (urlRepository.existsByAlias(alias)) {
             throw new BadRequestException("Url already exists");
