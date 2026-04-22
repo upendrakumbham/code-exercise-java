@@ -1,5 +1,6 @@
 package com.tpximpact.urlshortener.controller;
 
+import com.tpximpact.urlshortener.dto.UrlListResponse;
 import com.tpximpact.urlshortener.dto.UrlRequest;
 import com.tpximpact.urlshortener.dto.UrlResponse;
 import com.tpximpact.urlshortener.service.UrlService;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -36,6 +38,11 @@ class UrlController {
         return ResponseEntity.status(302)
                 .location(URI.create(fullUrl))
                 .build();
+    }
+
+    @GetMapping("/urls")
+    public ResponseEntity<List<UrlListResponse>> getAll() {
+        return ResponseEntity.ok(urlService.getAll());
     }
 
 }

@@ -1,5 +1,6 @@
 package com.tpximpact.urlshortener.service;
 
+import com.tpximpact.urlshortener.dto.UrlListResponse;
 import com.tpximpact.urlshortener.dto.UrlRequest;
 import com.tpximpact.urlshortener.dto.UrlResponse;
 import com.tpximpact.urlshortener.entity.Url;
@@ -9,17 +10,15 @@ import com.tpximpact.urlshortener.repository.UrlRepository;
 import com.tpximpact.urlshortener.util.UrlUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
-import java.util.UUID;
+import java.util.List;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class UrlServiceImpl implements UrlService {
 
-    private static final String BASE_URL = "http://localhost:8080/";
     private final UrlRepository urlRepository;
 
     @Override
@@ -40,7 +39,7 @@ public class UrlServiceImpl implements UrlService {
 
         urlRepository.save(url);
 
-        return new UrlResponse(BASE_URL + alias);
+        return new UrlResponse(UrlUtils.getBaseUrl(url.getFullUrl()) + alias);
     }
 
     @Override
@@ -51,7 +50,14 @@ public class UrlServiceImpl implements UrlService {
                 .orElseThrow(() -> new NotFoundException("Alias not found"));
     }
 
-    private String generateAlias() {
-        return UUID.randomUUID().toString().substring(0, 6);
+    @Override
+    public List<UrlListResponse> getAll() {
+        return urlRepository.findAll().stream()
+                .map(url -> new UrlListResponse(
+                        url.getAlias(),
+                        url.getFullUrl(),
+                        UrlUtils.getBaseUrl(url.getFullUrl()) + url.getAlias()
+                ))
+                .toList();
     }
 }
