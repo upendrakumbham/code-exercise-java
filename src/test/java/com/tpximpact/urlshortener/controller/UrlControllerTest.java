@@ -74,7 +74,6 @@ class UrlControllerTest {
     void redirect_Returns404_If_Alias_Not_Exist() throws Exception {
         // Given
         String aliasNotExist = "notExist";
-        String fullUrl = "https://tpximpact.com";
         when(urlService.getFullUrl(aliasNotExist)).thenThrow(NotFoundException.class);
 
         // When & Then
