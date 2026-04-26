@@ -16,7 +16,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@Transactional // Rolls back database changes after each test to ensure a clean state
 class UrlControllerIntegrationTest {
 
     @Autowired
